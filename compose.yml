@@ -9,10 +9,12 @@ services:
       - BUILDING_ID=16
       - PROBE_ID=6
       - PROBE_NAME=probe1
-      - INFLUXDB_URL=http://192.168.1.150:8086
+      # - INFLUXDB_URL=http://192.168.1.150:8086
+      - INFLUXDB_URL=https://192.168.1.150:8086
       - INFLUXDB_TOKEN=f/+9bxJ2nWfPGK6INsDyuMigGiqqNPRjoC1/GBaHI3A=
     volumes:
       - ./telegraf:/etc/telegraf/
+      - ./telegraf/certs/influxdb-selfsigned.crt:/etc/telegraf/ca.pem:ro
     restart: always
   # telegraf2:
   #   image: telegraf
