@@ -5,6 +5,9 @@ services:
     container_name: telegraf
     network_mode: host
     environment:
+      - ZONE_ID=11
+      - BUILDING_ID=16
+      - PROBE_ID=6
       - PROBE_NAME=probe1
       - INFLUXDB_URL=http://192.168.1.150:8086
       - INFLUXDB_TOKEN=f/+9bxJ2nWfPGK6INsDyuMigGiqqNPRjoC1/GBaHI3A=
