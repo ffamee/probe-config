@@ -1,23 +1,26 @@
 services:
 
   telegraf:
-    image: telegraf
+    image: telegraf:1.37
     container_name: telegraf
     network_mode: host
     environment:
       - ZONE_ID=11
       - BUILDING_ID=16
-      - PROBE_ID=6
+      - PROBE_ID=7
       - PROBE_NAME=probe1
       # - INFLUXDB_URL=http://192.168.1.150:8086
-      - INFLUXDB_URL=https://192.168.1.150:8086
+      # - INFLUXDB_URL=https://192.168.1.150:8086
+      - INFLUXDB_URL=https://localhost:8086
       - INFLUXDB_TOKEN=f/+9bxJ2nWfPGK6INsDyuMigGiqqNPRjoC1/GBaHI3A=
+      # - BACKEND_URL=http://host.docker.internal:8000
+      - BACKEND_URL=http://10.31.109.61:8000
     volumes:
       - ./telegraf:/etc/telegraf/
       - ./telegraf/certs/influxdb-selfsigned.crt:/etc/telegraf/ca.pem:ro
     restart: always
   # telegraf2:
-  #   image: telegraf
+  #   image: telegraf:1.37
   #   container_name: telegraf2
   #   network_mode: host
   #   environment:
