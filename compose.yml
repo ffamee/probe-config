@@ -11,7 +11,8 @@ services:
       - PROBE_NAME=probe1
       # - INFLUXDB_URL=http://192.168.1.150:8086
       # - INFLUXDB_URL=https://192.168.1.150:8086
-      - INFLUXDB_URL=https://localhost:8086
+      # - INFLUXDB_URL=https://localhost:8086
+      - INFLUXDB_URL=https://10.31.109.61:8086
       - INFLUXDB_TOKEN=f/+9bxJ2nWfPGK6INsDyuMigGiqqNPRjoC1/GBaHI3A=
       # - BACKEND_URL=http://host.docker.internal:8000
       - BACKEND_URL=http://10.31.109.61:8000
