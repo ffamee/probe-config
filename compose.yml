@@ -1,34 +1,30 @@
 services:
 
   telegraf:
-    image: telegraf:1.37
+    # image: telegraf:1.37
+    build: .
     container_name: telegraf
     network_mode: host
+    # user: root
     environment:
-      - ZONE_ID=11
-      - BUILDING_ID=16
-      - PROBE_ID=7
-      - PROBE_NAME=probe1
-      # - INFLUXDB_URL=http://192.168.1.150:8086
-      # - INFLUXDB_URL=https://192.168.1.150:8086
-      # - INFLUXDB_URL=https://localhost:8086
-      - INFLUXDB_URL=https://10.31.109.61:8086
-      - INFLUXDB_TOKEN=f/+9bxJ2nWfPGK6INsDyuMigGiqqNPRjoC1/GBaHI3A=
-      # - BACKEND_URL=http://host.docker.internal:8000
-      - BACKEND_URL=http://10.31.109.61:8000
+      - ZONE_ID=${ZONE_ID}
+      - BUILDING_ID=${BUILDING_ID}
+      - PROBE_ID=${PROBE_ID}
+      - PROBE_NAME=${PROBE_NAME}
+      - INFLUXDB_URL=${INFLUXDB_URL}
+      - INFLUXDB_TOKEN=${INFLUXDB_TOKEN}
+      - BACKEND_URL=${BACKEND_URL}
+      - INTERFACE_NAME=${INTERFACE_NAME}
     volumes:
-      - ./telegraf:/etc/telegraf/
+      - ./telegraf/telegraf.conf:/etc/telegraf/telegraf.conf:ro
+      - ./telegraf/telegraf.d:/etc/telegraf/telegraf.d:ro
       - ./telegraf/certs/influxdb-selfsigned.crt:/etc/telegraf/ca.pem:ro
+      - ./telegraf/librespeed-cli/librespeed-cli-linux-amd64:/usr/bin/librespeed-cli:ro
+      - ./telegraf/librespeed-cli/servers.json:/etc/librespeed-cli/servers.json:ro
+      - ./telegraf/scripts:/etc/telegraf/scripts:ro
     restart: always
-  # telegraf2:
-  #   image: telegraf:1.37
-  #   container_name: telegraf2
-  #   network_mode: host
-  #   environment:
-  #     - PROBE_NAME=probe2
-  #   volumes:
-  #     - ./telegraf:/etc/telegraf/
-  #   restart: always
+    entrypoint: ["/etc/telegraf/scripts/start_up.sh"]
+    command: telegraf
 
   # mosquitto:
   #   image: eclipse-mosquitto

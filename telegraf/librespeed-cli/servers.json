@@ -1,0 +1,11 @@
+[
+  {
+    "id": 1,
+    "name": "KU Server",
+    "server": "https://speedtest3.ku.ac.th/",
+    "dlURL": "garbage.php",
+    "ulURL": "empty.php",
+    "pingURL": "empty.php",
+    "getIpURL": "getIP.php"
+  }
+]
