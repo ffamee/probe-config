@@ -20,7 +20,7 @@ services:
       - ./telegraf/telegraf.d:/etc/telegraf/telegraf.d:ro
       - ./telegraf/certs/influxdb-selfsigned.crt:/etc/telegraf/ca.pem:ro
       - ./telegraf/librespeed-cli/librespeed-cli-linux-amd64:/usr/bin/librespeed-cli:ro
-      - ./telegraf/librespeed-cli/servers.json:/etc/librespeed-cli/servers.json:ro
+      # - ./telegraf/librespeed-cli/servers.json:/etc/librespeed-cli/servers.json:ro
       - ./telegraf/scripts:/etc/telegraf/scripts:ro
     restart: always
     entrypoint: ["/etc/telegraf/scripts/start_up.sh"]
